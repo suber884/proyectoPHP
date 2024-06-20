@@ -16,7 +16,7 @@ class LibroController extends Controller
     public function index()
     {
         //
-        $datos['libros'] = Libro::paginate(1);
+        $datos['libros'] = Libro::paginate(2);
         return view('libro.index', $datos);
     }
 
@@ -38,14 +38,16 @@ class LibroController extends Controller
         'autor' => 'required|string|max:100',
         'categoria' => 'required|string|max:100',
         'editorial' => 'required|string|max:100',
-        'isbn' => 'required|string|max:100',
+        'isbn' => 'required|string|max:100|unique:libros,isbn',
+        'imagen' => 'required|max:10000|mimes:jpg,jpeg,png,gif',
         'precio' => 'required|integer|max:100',
               ];
        $mensaje = [
         'required' => 'El :attribute es requerido',
         'categoria.required'=>'La categoria es requerida',
         'editorial.required'=>'La editorial es requerida',
-        'imagen.required'=>'La imagen es requerida'
+        'imagen.required'=>'La imagen es requerida',
+        'unique'=>'El ISBN ya esta registrado',
        ];
        
 
@@ -88,7 +90,7 @@ class LibroController extends Controller
             'autor' => 'required|string|max:100',
             'categoria' => 'required|string|max:100',
             'editorial' => 'required|string|max:100',
-            'isbn' => 'required|string|max:100',
+            'isbn' => 'required|string|max:100|unique:libros,isbn',
             'precio' => 'required|integer|max:100',
            
            ];
@@ -96,10 +98,10 @@ class LibroController extends Controller
             'required' => 'El :attribute es requerido',
             'categoria.required'=>'La categoria es requerida',
             'editorial.required'=>'La editorial es requerida',
-           
+           'unique'=>'El ISBN ya esta registrado',
            ];
            if ($request->hasFile('imagen')) {
-            $campos=[ 'imagen' => 'required|max:10000|mimes:jpg,jpeg,png'];
+            $campos=[ 'imagen' => 'required|max:10000|mimes:jpg,jpeg,png,gif'];
             $mensaje=[ 'imagen.required' => 'La imagen es requerida'];
            }
 

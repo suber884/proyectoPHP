@@ -16,7 +16,7 @@
 <table class="table">
     <thead class="table-group-divider text-center">
         <tr>
-            <th>ID</th>
+            {{-- <th>ID</th> --}}
             <th>Imagen</th>
             <th>Titulo</th>
             <th>Autor</th>
@@ -31,7 +31,7 @@
         @foreach ($libros as $libro)
          
         <tr>
-            <td>{{ $libro->id}}</td>
+            {{-- <td>{{ $libro->id}}</td> --}}
             <td>
                     <img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$libro->imagen}}" width="100" alt="">
                     {{-- {{ $libro->imagen}} --}}
