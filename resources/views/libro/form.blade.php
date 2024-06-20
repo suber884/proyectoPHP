@@ -1,5 +1,3 @@
-
- 
     <h3 class="text-center fw-bold">{{ $modo }} LIBRO</h3>
 
     @if(count($errors)>0)
@@ -39,12 +37,18 @@
             </div>
                 <div class="form-group">
                 <label for="isbn">ISBN</label>
-                <input class="form-control" type="text" name="isbn" 
-                value="{{ isset($libro->isbn)? $libro->isbn:old('isbn') }}" id="isbn">
+                {{-- <input class="form-control" type="text" name="isbn"  --}}
+                {{-- value="{{ isset($libro->isbn)? $libro->isbn:old('isbn') }}" disabled id="isbn"> --}}
+              {{-- deshabilita el isbn cuando se esta editando --}}
+                @if(isset($libro))
+                <input class="form-control" type="text" name="isbn" value="{{ old('isbn', $libro->isbn) }}" disabled>
+            @else
+                <input class="form-control" type="text" name="isbn" value="{{ old('isbn') }}">
+            @endif
             </div>
             <div class="form-group row g-3">
                 <div class="col-auto">
-                <label for="imagen">Imagen</label>
+                <label for="imagen"></label>
                 {{-- {{ $libro->imagen }} --}}
                 @if(isset($libro->imagen))
                 <img src="{{asset('storage').'/'.$libro->imagen}}" class="img-thumbnail img-fluid" width="75" alt="">
